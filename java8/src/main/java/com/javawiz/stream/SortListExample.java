@@ -3,12 +3,13 @@ package com.javawiz.stream;
 import com.javawiz.data.CollectionDB;
 import com.javawiz.model.Employee;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
 public class SortListExample {
     public static void main(String[] args) {
-        List<Integer> list = List.of(5, 3, 9, 1, 8, 2, 4, 7);
+        List<Integer> list = Arrays.asList(5, 3, 9, 1, 8, 2, 4, 7);
         decendSort(list);
         
         List<Employee> employees = CollectionDB.getEmployees();

@@ -23,7 +23,7 @@ public class SampleExampleOne {
         //The ‘filter’ method is used to eliminate elements based on a criteria.
         //prints a count of empty strings using filter.
         List<String> strings1 = Arrays.asList("abc", "", "bc", "efg", "abcd","", "jkl");
-        long count  = strings1.stream().filter(data -> data.isEmpty()).count();
+        long count  = strings1.stream().filter(String::isEmpty).count();
         System.out.println("Count: "+count);
         System.out.println("---------------------------");
         //The ‘limit’ method is used to reduce the size of the stream.
@@ -38,13 +38,7 @@ public class SampleExampleOne {
         System.out.println("-----------------------------");
         //parallelStream is the alternative of stream for parallel processing.
         //prints a count of empty strings using parallelStream.
-        long count1 = strings1.parallelStream().filter(str -> str.isEmpty()).count();
+        long count1 = strings1.parallelStream().filter(String::isEmpty).count();
         System.out.println("Count: "+count1);
-        System.out.println("------------------------------");
-        Integer value1 = null;
-        Integer value2 = 10;
-
-        //Optional.ofNullable - allows passed parameter to be null.
-        Optional<Integer> a = Optional.ofNullable(value1);
     }
 }

@@ -1,6 +1,7 @@
 package com.javawiz.stream.sort;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,6 +41,12 @@ public class SortMapExample {
     }
 
     private static Map<String, Integer> getUnSortedMap() {
-        return Map.of("alex",1, "charles", 4, "david", 2, "brian", 5, "elle", 3);
+        Map<String, Integer> map = new HashMap<>();
+        map.put("alex", 1);
+        map.put("charles", 4);
+        map.put("david", 2);
+        map.put("brian", 5);
+        map.put("elle", 3);
+        return map;
     }
 }

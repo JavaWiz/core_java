@@ -13,8 +13,11 @@ public class FindFirstExample {
     public static void main(String[] args) {
         List<Employee> employeeList = CollectionDB.getEmployees();
         List<Employee> emptylist = new ArrayList<>();
+
         System.out.println(employeeList.stream().findFirst().get().getName());
+
         System.out.println(employeeList.stream().findAny().get().getName());
+
         System.out.println(emptylist.stream().findFirst().map(Employee::getName).orElse(""));
 
         // Creating a List of Integers
@@ -22,7 +25,6 @@ public class FindFirstExample {
 
         // Using Stream findFirst()
         Optional<Integer> answer = list.stream().findFirst();
-
         // if the stream is empty, an empty
         // Optional is returned.
         if (answer.isPresent()) {
