@@ -33,7 +33,7 @@ public class Main {
 		list.add("D");
 		list.add("E");
 		
-		list.forEach(item->System.out.println(item));
+		list.forEach(System.out::println);
 			
 		list.forEach(item->{
 			if("C".equals(item)){

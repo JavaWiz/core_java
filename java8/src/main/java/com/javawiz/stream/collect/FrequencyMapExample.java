@@ -38,6 +38,16 @@ public class FrequencyMapExample {
       System.out.println("===========================");
 
       System.out.println(frequencyMap("abccbabdaf".chars().mapToObj(c -> (char) c)));
+      
+      System.out.println("===========================");
+      
+      //find the unique character in string
+      Stream.of("aaaabbbcddee".split(""))
+      .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+      .entrySet()
+      .stream()
+      .filter(entry -> entry.getValue() == 1)
+      .forEach(entry -> System.out.println(entry.getKey()));
    }
 
    private static <T> Map<T, Long> frequencyMap(Stream<T> elements){

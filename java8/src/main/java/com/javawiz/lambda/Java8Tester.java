@@ -18,7 +18,7 @@ public class Java8Tester {
 		Java8Tester tester = new Java8Tester();
 
 		// with type declaration
-		MathOperation addition = (int a, int b) -> a + b;
+		MathOperation addition = Integer::sum;
 
 		// with out type declaration
 		MathOperation subtraction = (a, b) -> a - b;

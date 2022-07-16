@@ -28,14 +28,9 @@ public class CounterExample {
         System.out.println("---------------------");
         //we can use AtomicInteger's incrementAndGet or (++i) and getAndIncrement or (i++) method on it.
         AtomicInteger atomicCounter = new AtomicInteger(0);
-
         List<String> other = list.stream().map(item -> item + atomicCounter.getAndIncrement())
                 .collect(Collectors.toList());
-
         other.forEach(System.out::println);
-
         System.out.println("The lambda ran " + atomicCounter.get() + " times");
-
-
     }
 }
