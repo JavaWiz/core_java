@@ -39,7 +39,7 @@ public class SortMapExample {
 
         System.out.println("Reverse Sorted Map   : " + reverseSortedMap+"\n");
     }
-
+    
     private static Map<String, Integer> getUnSortedMap() {
         Map<String, Integer> map = new HashMap<>();
         map.put("alex", 1);

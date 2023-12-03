@@ -1,13 +1,13 @@
 package com.javawiz.stream;
 
-import com.javawiz.data.CollectionDB;
-import com.javawiz.model.Employee;
-import com.javawiz.model.Person;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.function.Predicate;
+
+import com.javawiz.data.CollectionDB;
+import com.javawiz.model.Employee;
+import com.javawiz.model.Person;
 
 public class StreamMaxMinExample {
 	public static void main(String[] args) {
@@ -29,6 +29,11 @@ public class StreamMaxMinExample {
 		Optional<Employee> minAgeEmp = employeeList.stream().min(Comparator.comparing(Employee::getAge));
 		
 		System.out.println("Employee with min age :" + (minAgeEmp.isPresent() ? minAgeEmp.get() : "Not Applicable"));
+		
+		Predicate<Employee> salP = e -> e.getSalary() > 20000;
+		employeeList.stream().filter(salP)
+				.min(Comparator.comparing(Employee::getAge))
+				.ifPresent(System.out::println);
+		// Select emp  from employee where 
 	}
-
 }

@@ -28,10 +28,8 @@ public class Employee implements Comparable<Employee> {
 	}
 
 	@Override
-	public String toString(){
+	public String toString() {
 		DecimalFormat dformat = new DecimalFormat(".##");
-		return "Employee Name:"+this.name
-				+ "  Age:"+this.age
-				+ "  Salary:"+dformat.format(this.salary);
+		return "Employee [id=" + id + ", name=" + name + ", age=" + age + ", salary=" + dformat.format(salary) + "]";
 	}
 }
