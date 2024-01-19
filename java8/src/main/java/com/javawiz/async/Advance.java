@@ -1,13 +1,9 @@
 package com.javawiz.async;
 
 
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Java 8 introduced CompletableFuture with a combination of a Future and CompletionStage.
