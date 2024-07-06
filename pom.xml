@@ -33,6 +33,7 @@
     <modules>
     	<module>adhoc</module>
     	<module>java8</module>
+        <module>java9</module>
         <module>java11</module>
     </modules>
 </project>
