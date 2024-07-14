@@ -1,7 +1,7 @@
 package com.javawiz.cryptography.asymmetric;
 
+import jakarta.xml.bind.DatatypeConverter;
 import javax.crypto.Cipher;
-import javax.xml.bind.DatatypeConverter;
 import java.security.*;
 
 public class AsymmetricRSA {

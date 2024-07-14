@@ -20,20 +20,10 @@ public class ComparatorUsingLambdas {
 		onlineCourses.add(new TrainingCourses("NoSQL", new BigDecimal("310")));
 
 		// Creating Comparator to compare Price of training courses
-		final Comparator<TrainingCourses> PRICE_COMPARATOR = new Comparator<TrainingCourses>() {
-			@Override
-			public int compare(TrainingCourses t1, TrainingCourses t2) {
-				return t1.price().compareTo(t2.price());
-			}
-		};
+		final Comparator<TrainingCourses> PRICE_COMPARATOR = Comparator.comparing(TrainingCourses::price);
 
 		// Comparator to compare title of courses
-		final Comparator<TrainingCourses> TITLE_COMPARATOR = new Comparator<TrainingCourses>() {
-			@Override
-			public int compare(TrainingCourses c1, TrainingCourses c2) {
-				return c1.title().compareTo(c2.title());
-			}
-		};
+		final Comparator<TrainingCourses> TITLE_COMPARATOR = Comparator.comparing(TrainingCourses::title);
 
 		// sorting objects using Comparator by price
 		System.out.println("List of training courses, before sorting");
