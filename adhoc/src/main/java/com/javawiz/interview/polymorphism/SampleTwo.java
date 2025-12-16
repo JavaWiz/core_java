@@ -2,7 +2,7 @@ package com.javawiz.interview.polymorphism;
 
 public class SampleTwo {
 
-    void display(SampleTwo t){
+    void display(Integer t){
         System.out.println("SampleTwo");
     }
 

@@ -16,8 +16,8 @@ class Parent {
 
 class Child extends Parent {
     //Uncomment and test it
-    /*
-    Parent display(int i){//Compile error - Parent is not compatible with Child
+
+    /*Parent display(int i){//Compile error - Parent is not compatible with Child
         System.out.println("child");
         return null;
     }*/
