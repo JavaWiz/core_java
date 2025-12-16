@@ -1,6 +1,11 @@
 package com.javawiz.designpattern.creational.builder;
 
 public class Phone {
+	private final PhoneType phoneType;
+	private final OSType osType;
+	private final ProcessorType processorType;
+	private final int ramSize;
+
 	public enum PhoneType {
 		ANDROID, 
 		IPHONE
@@ -16,11 +21,6 @@ public class Phone {
 		DIMENSITY_9000, 
 		SNAPDRAGON_8_GEN_1
 	};
-	
-	private PhoneType phoneType;
-	private OSType osType;
-	private ProcessorType processorType;
-	private int ramSize;
 
 	public Phone(PhoneType phoneType, OSType osType, ProcessorType processorType, int ramSize) {
 		this.phoneType = phoneType;
@@ -33,37 +33,56 @@ public class Phone {
 		return phoneType;
 	}
 
-	public void setPhoneType(PhoneType phoneType) {
-		this.phoneType = phoneType;
-	}
-
 	public OSType getOsType() {
 		return osType;
-	}
-
-	public void setOsType(OSType osType) {
-		this.osType = osType;
 	}
 
 	public ProcessorType getProcessorType() {
 		return processorType;
 	}
 
-	public void setProcessor(ProcessorType processorType) {
-		this.processorType = processorType;
-	}
-
 	public int getRamSize() {
 		return ramSize;
-	}
-
-	public void setRamSize(int ramSize) {
-		this.ramSize = ramSize;
 	}
 
 	@Override
 	public String toString() {
 		return "Phone [phoneType=" + phoneType + ", osType=" + osType + ", ProcessorType=" + processorType + ", ramSize="
 				+ ramSize + "]";
+	}
+
+	public static PhoneBuilder builder() {
+		return new PhoneBuilder();
+	}
+
+	public static class PhoneBuilder {
+		private PhoneType phoneType;
+		private OSType osType;
+		private ProcessorType processorType;
+		private int ramSize;
+
+		public PhoneBuilder setPhoneType(PhoneType phoneType) {
+			this.phoneType = phoneType;
+			return this;
+		}
+
+		public PhoneBuilder setOsType(OSType osType) {
+			this.osType = osType;
+			return this;
+		}
+
+		public PhoneBuilder setProcessorType(ProcessorType processorType) {
+			this.processorType = processorType;
+			return this;
+		}
+
+		public PhoneBuilder setRamSize(int ramSize) {
+			this.ramSize = ramSize;
+			return this;
+		}
+
+		public Phone build() {
+			return new Phone(phoneType, osType, processorType, ramSize);
+		}
 	}
 }

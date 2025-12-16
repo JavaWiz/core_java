@@ -1,6 +1,7 @@
 package com.javawiz.interview;
 
 import java.util.Deque;
+import java.util.Stack;
 
 public class BracketPatternMatchExample {
 
@@ -10,7 +11,7 @@ public class BracketPatternMatchExample {
     }
 
     private static boolean isBalanced(String input) {
-        java.util.Stack<Character> stack = new java.util.Stack<>();
+        Stack<Character> stack = new Stack<>();
         for (char ch : input.toCharArray()) {
             if (ch == '{' || ch == '[' || ch == '(') {
                 stack.push(ch);
