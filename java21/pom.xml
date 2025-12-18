@@ -5,7 +5,6 @@
         <groupId>com.javawiz</groupId>
         <artifactId>core_java</artifactId>
         <version>1.0</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <artifactId>java21</artifactId>
@@ -16,8 +15,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
     </properties>
 
     <dependencies>
