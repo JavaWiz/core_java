@@ -11,7 +11,7 @@ public class BracketPatternMatchExample {
 
     private static boolean isBalanced(String input){
         Deque<Character> deque = new java.util.ArrayDeque<>();
-        for(char ch : input.toCharArray()){
+        for(Character ch : input.toCharArray()){
             switch (ch) {
                 case '{', '[', '(' -> deque.push(ch);
                 case ')', '}', ']' -> {

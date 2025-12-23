@@ -1,12 +1,14 @@
 package com.javawiz.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,11 +18,6 @@ public class Employee implements Comparable<Employee> {
 	private Integer age;
 	private double salary;
 	private List<String> phoneNumbers;
-	
-	public Employee(String name, Integer age) {
-		this.name = name;
-		this.age = age;
-	}
 
 	@Override
 	public int compareTo(Employee o) {

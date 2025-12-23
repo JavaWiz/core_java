@@ -1,4 +1,4 @@
-package com.javawiz.java9.stream;
+package com.javawiz.stream;
 
 import java.util.List;
 import java.util.stream.Collectors;  
