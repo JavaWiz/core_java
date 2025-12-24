@@ -4,8 +4,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>com.javawiz</groupId>
+	<parent>
+		<groupId>com.javawiz</groupId>
+		<artifactId>core_java</artifactId>
+		<version>1.0</version>
+	</parent>
 	<artifactId>adhoc</artifactId>
 	<version>1.0</version>
     <build>
@@ -88,12 +91,6 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
 			<version>4.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.30</version>
-			<scope>optional</scope>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
