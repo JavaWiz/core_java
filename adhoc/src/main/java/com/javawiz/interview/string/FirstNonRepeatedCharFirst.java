@@ -1,4 +1,4 @@
-package com.javawiz.interview;
+package com.javawiz.interview.string;
 
 import java.util.Map.Entry;
 import java.util.function.Function;

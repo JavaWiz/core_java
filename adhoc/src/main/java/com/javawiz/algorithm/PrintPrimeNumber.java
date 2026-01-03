@@ -8,7 +8,7 @@ public class PrintPrimeNumber {
     public static void main(String[] args) {
 
         long count = Stream.iterate(0, n -> n + 1)
-                .limit(1000)
+                .limit(100)
                 .filter(PrintPrimeNumber::isPrime)
                 .peek(x -> System.out.format("%s\t", x))
                 .count();
@@ -18,8 +18,19 @@ public class PrintPrimeNumber {
     }
 
     public static boolean isPrime(int number) {
-        return (number <= 1) ? false // 1 is not prime and also not composite
-        		: IntStream.rangeClosed(2, number / 2)
-        		.noneMatch(i -> number % i == 0);
+        // 1 is not prime and also not composite
+        return number > 1 && IntStream.rangeClosed(2, number / 2).noneMatch(i -> number % i == 0);
+    }
+
+    public static boolean isPrimeNumber(int x){
+        if(x<2) return false;
+
+        if(x!=2 && x%2==0) return false;
+
+        for(int i=3;i*i<x;i+=2) {
+            System.out.println(i);
+            if(x%i == 0) return false;
+        }
+        return true;
     }
 }

@@ -4,7 +4,7 @@ public class BS {
     public static int search(int[] array, int element){
         int start = 0, end = array.length -1;
         while(start<=end){
-            int mid = (start+end)/2;
+            int mid = start + (end - start)/2;
             if(element == array[mid])
                 return mid;
             else if(element> array[mid])
@@ -15,15 +15,15 @@ public class BS {
         return -1;
     }
 
-    public static int bsRecursive(int[] array, int first, int end, int element){
-        if(first<=end){
-            int mid = (first + end)/2;
+    public static int bsRecursive(int[] array, int start, int end, int element){
+        if(start<=end){
+            int mid = start + (end - start)/2;
             if(array[mid] == element){
                 return mid;
             } else if(array[mid] < element){
                 return bsRecursive(array, mid + 1, end, element);
             } else {
-                return bsRecursive(array, first, mid - 1, element);
+                return bsRecursive(array, start, mid - 1, element);
             }
         }
         return -1;

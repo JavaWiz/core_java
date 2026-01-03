@@ -3,6 +3,8 @@ package com.javawiz.algorithm;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.spi.CurrencyNameProvider;
 
 public class Fibonacci {
 
@@ -20,6 +22,7 @@ public class Fibonacci {
 		System.out.println("");
 		System.out.println("Fibonacci : "+fibWithCaching(n));
 		System.out.println("");
+		fibWithCHMCaching(n);
 		sc.close();
 	}
 	
@@ -79,5 +82,16 @@ public class Fibonacci {
 			}
 		}
 		return result;
+	}
+
+	private static final Map<Integer, Integer> HMP = new ConcurrentHashMap<>();
+	public static int fibWithCHMCaching(int n){
+		if (n <= 1)
+			return n;
+
+		return HMP.computeIfAbsent(n, k -> {
+			System.out.println("calculating fib(" + k + ")");
+			return fibWithCHMCaching(k - 1) + fibWithCHMCaching(k - 2);
+		});
 	}
 }

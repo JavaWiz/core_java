@@ -10,6 +10,9 @@ public class IntStack {
     }
 
     public void push(int element){
+        if (isFull()) {
+            throw new StackOverflowError("Stack is full");
+        }
         array[++topOfStack] = element;
     }
 
@@ -22,7 +25,7 @@ public class IntStack {
     }
 
     public boolean isEmpty(){
-        return topOfStack == 1;
+        return topOfStack < 0;
     }
 
     public boolean isFull(){

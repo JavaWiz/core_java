@@ -8,18 +8,6 @@ public class FindDuplicate {
         //printRepeating(array);
     }
 
-    public static boolean isPrime(int x){
-        if(x<2) return false;
-
-        if(x!=2 && x%2==0) return false;
-
-        for(int i=3;i*i<x;i+=2) {
-            System.out.println(i);
-            if(x%i == 0) return false;
-        }
-        return true;
-    }
-
     public static void printRepeating(int[] arr) {
         int count[] = new int[arr.length];
         int i;

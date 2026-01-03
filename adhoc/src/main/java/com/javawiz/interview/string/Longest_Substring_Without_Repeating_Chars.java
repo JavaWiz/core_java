@@ -1,5 +1,8 @@
 package com.javawiz.interview.string;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Longest Substring Without Repeating Characters
  * Given a string s, find the length of the longest substring without repeating characters.
@@ -24,27 +27,69 @@ package com.javawiz.interview.string;
 public class Longest_Substring_Without_Repeating_Chars {
     public static void main(String[] args) {
         String str = "pwwkew";
+        System.out.println("Longest substring without repeating characters (stream way): " + normalWay(str));
+        System.out.println("Longest substring without repeating characters (sliding window way): " + slidingWindowWay(str));
         System.out.println("Length of longest substring without repeating characters: " + lengthOfLongestSubstring(str));
     }
 
-    private static String lengthOfLongestSubstring(String str) {
-        int n = str.length();
-        int maxLength = 0;
-        int start = 0;
-        String longestSubstring = "";
+    private static String normalWay(String str){
+        StringBuilder longestSubstring = new StringBuilder();
+        StringBuilder currentSubstring = new StringBuilder();
 
-        for (int end = 0; end < n; end++) {
-            for (int i = start; i < end; i++) {
-                if (str.charAt(end) == str.charAt(i)) {
-                    start = i + 1;
-                    break;
-                }
+        for (char c : str.toCharArray()) {
+            // check if char exists in current substring,
+            // if yes remove all chars before and including that char
+            int index = currentSubstring.indexOf(String.valueOf(c));
+            if (index != -1) {
+                currentSubstring.delete(0, index + 1);
             }
-            if (end - start + 1 > maxLength) {
-                maxLength = end - start + 1;
-                longestSubstring = str.substring(start, end + 1);
+            // append current char to current substring
+            currentSubstring.append(c);
+            // update longest substring if current is longer
+            if (currentSubstring.length() > longestSubstring.length()) {
+                longestSubstring.setLength(0);
+                longestSubstring.append(currentSubstring);
             }
         }
-        return longestSubstring;
+        return longestSubstring.toString();
     }
+
+    //We can use a HashSet and two pointers (sliding window) for a shorter and efficient solution.
+    // Here’s a concise version:
+    private static String slidingWindowWay(String str) {
+        int left = 0, right = 0, maxLength = 0, start = 0;
+        Set<Character> set = new HashSet<>();
+
+        while (right < str.length()) {
+            if (!set.contains(str.charAt(right))) {
+                set.add(str.charAt(right));
+                int currentWindowLength = right - left + 1;
+                if (currentWindowLength > maxLength) {
+                    maxLength = currentWindowLength;
+                    start = left;
+                }
+                right++;
+            } else {
+                set.remove(str.charAt(left++));
+            }
+        }
+        return str.substring(start, start + maxLength);
+    }
+
+    public static int lengthOfLongestSubstring(String s) {
+        Set<Character> set = new HashSet<>();
+        int max = 0, i = 0, j = 0, start = 0;
+        while (j < s.length()) {
+            if (!set.contains(s.charAt(j))) {
+                set.add(s.charAt(j++));
+                max = Math.max(max, set.size());
+                start = i;
+            } else {
+                set.remove(s.charAt(i++));
+            }
+        }
+        System.out.println("Longest substring without repeating characters: " + s.substring(start, start + max));
+        return max;
+    }
+
 }

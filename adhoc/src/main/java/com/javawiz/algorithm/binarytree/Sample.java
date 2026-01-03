@@ -1,6 +1,18 @@
 package com.javawiz.algorithm.binarytree;
 
 import java.util.Scanner;
+/**
+ * In this example, we will demonstrate how to insert nodes into a binary search tree (BST)
+ * and perform an in-order traversal to display the nodes in sorted order.
+ * The insert method ensures that the BST properties are maintained,
+ * where the left subtree contains values less than or equal to the root,
+ * and the right subtree contains values greater than the root.
+ * The inOrder method recursively visits the left subtree, the root node, and then the right subtree,
+ * resulting in a sorted sequence of values when printed.
+ *
+ * @author JavaWiz
+ *
+ */
 
 public class Sample {
 	
@@ -23,17 +35,13 @@ public class Sample {
     }
 	
 	public static Node insert(Node root, int data) {
-		if(root == null) {
+		if (root == null) {
 			return new Node(data);
+		}
+		if (data <= root.data) {
+			root.left = insert(root.left, data);
 		} else {
-			Node current;
-			if(data <= root.data) {
-				current = insert(root.left, data);
-				root.left = current;
-			}else {
-				current = insert(root.right, data);
-				root.right = current;
-			}
+			root.right = insert(root.right, data);
 		}
 		return root;
 	}
@@ -42,7 +50,7 @@ public class Sample {
 		if(root == null)
 			return;
 		inOrder(root.left);
-		System.out.println(root.data);
+		System.out.print(root.data +  " ");
 		inOrder(root.right);
 	}
 }

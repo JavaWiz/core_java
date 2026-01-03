@@ -22,7 +22,7 @@ public class TreeTraverse {
     }
 
     /*
-    In order (Left, Root, Right)
+    In order (Left, Root, Right) makes sorted order for BST
     Pre order (Root, Left, Right)
     Post order (Left, Right, Root)
     1
@@ -60,30 +60,17 @@ public class TreeTraverse {
         System.out.print(root.data+  " ");
     }
 
+    // Insert method to add nodes to the BST
     public static Node insert(Node root, int data) {
         if(root == null) {
             return new Node(data);
         } else {
-            Node cur;
             if(data <= root.data) {
-                cur = insert(root.left, data);
-                root.left = cur;
+                root.left = insert(root.left, data);
             } else {
-                cur = insert(root.right, data);
-                root.right = cur;
+                root.right = insert(root.right, data);
             }
             return root;
         }
-    }
-}
-
-class Node {
-    Node left;
-    Node right;
-    int data;
-
-    Node(int data) {
-        this.data = data;
-        left = right = null;
     }
 }

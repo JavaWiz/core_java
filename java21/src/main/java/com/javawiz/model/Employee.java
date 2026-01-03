@@ -5,7 +5,13 @@ import java.util.List;
 import lombok.Builder;
 
 @Builder
-public record Employee(int id, String name, int age, Double salary, List<String> phoneNumber, Department department) {
+public record Employee(
+    int id,
+    String name,
+    int age,
+    Double salary,
+    List<String> phoneNumber,
+    Department department) {
     public static List<Employee> getEmployees(){
         return Arrays.asList(
             Employee.builder().id(3).name("Elle").age(34).salary(12000.00).phoneNumber(Arrays.asList("425-423-5355", "324-424-4234"))

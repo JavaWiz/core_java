@@ -6,16 +6,13 @@
         <artifactId>core_java</artifactId>
         <version>1.0</version>
     </parent>
-
-    <artifactId>java21</artifactId>
+    <artifactId>java17</artifactId>
     <packaging>jar</packaging>
-
-    <name>java21</name>
-    <url>http://maven.apache.org</url>
+    <name>java17</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 </project>

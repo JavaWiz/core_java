@@ -1,6 +1,8 @@
 package com.javawiz.interview.array;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class RemoveDuplicate {
 
@@ -12,29 +14,15 @@ public class RemoveDuplicate {
         System.out.println("Array after removing duplicates lagacy way: " + Arrays.toString(removeDuplicatesLegacyWay(arr)));
     }
 
-    // Method to remove duplicates from an array legacy way
-    public static int[] removeDuplicatesLegacyWay(int[] arr){
-        int n = arr.length;
-        if (n == 0 || n == 1) {
-            return arr;
+    public static int[] removeDuplicatesLegacyWay(int[] arr) {
+        Set<Integer> set = new LinkedHashSet<>();
+        for (int num : arr) {
+            set.add(num);
         }
-        Arrays.sort(arr); // Sort the array
-        int[] temp = new int[n];
-        int j = 0;
-        for (int i = 0; i < n - 1; i++) {
-            if (arr[i] != arr[i + 1]) {
-                temp[j++] = arr[i]; // add unique element to temp array
-            }
-        }
-        temp[j++] = arr[n - 1]; // add the last element
-        System.out.println("Temp array with unique elements: " + Arrays.toString(temp));
-        int[] result = new int[j];
-        System.arraycopy(temp, 0, result, 0, j); // Copy unique elements to result array
-        return result;
+        return set.stream().mapToInt(Integer::intValue).toArray();
     }
 
     public static int[] removeDuplicates(int[] arr) {
         return Arrays.stream(arr).distinct().toArray();
     }
-
 }

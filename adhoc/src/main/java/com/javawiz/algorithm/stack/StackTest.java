@@ -15,7 +15,9 @@ public class StackTest {
         is.push(8);
         is.push(7);
         System.out.println("peek : "+is.peek());
+        System.out.println("after pop size : "+is.currentSize());
         is.push(3);
+        System.out.println("peek : "+is.peek());
         is.push(9);
         System.out.println("size : "+is.currentSize());
     }

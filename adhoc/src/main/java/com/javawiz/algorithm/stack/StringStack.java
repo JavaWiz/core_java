@@ -10,6 +10,9 @@ public class StringStack {
     }
 
     public void push(String str){
+        if (isFull()) {
+            throw new StackOverflowError("Stack is full");
+        }
         array[++topOfStack] = str;
     }
 

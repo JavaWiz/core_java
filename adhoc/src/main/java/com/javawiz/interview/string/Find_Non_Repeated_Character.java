@@ -3,8 +3,10 @@ package com.javawiz.interview.string;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /*
 find non-repeated character in a given string using Java 8 Stream API.
@@ -18,6 +20,7 @@ public class Find_Non_Repeated_Character {
         optimized_traditional_version(s);
         firstNonRepeatedCharacter(s);
         streamWay(s);
+        anotherStreamWay(s);
     }
 
     //most simple way
@@ -49,7 +52,8 @@ public class Find_Non_Repeated_Character {
     }
 
     private static void firstNonRepeatedCharacter(String s) {
-        Map<Integer, Long> charCountMap = s.chars()
+       Map<Integer, Long> charCountMap =
+            s.chars()
             .boxed()
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         s.chars()
@@ -64,17 +68,44 @@ public class Find_Non_Repeated_Character {
 
     private static void streamWay(String s){
        s.chars()
+           // Box to Integer stream
             .boxed()
-            .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
-            .entrySet()
-            .stream()
+            // Group by character and count occurrences
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+            .entrySet().stream()
+            // Filter non-repeated characters
             .filter(entry -> entry.getValue() == 1)
+            // Get the first non-repeated character
             .map(e -> (char)e.getKey().intValue())
             .findFirst()
             .ifPresentOrElse(
                 c -> System.out.println("First non-repeated character: " + c),
                 () -> System.out.println("No non-repeated character found.")
             );
+    }
+
+    private static void anotherStreamWay(String input) {
+        input.chars()
+            .mapToObj(c -> (char)c)
+            .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+            .entrySet().stream()
+            .filter(e -> e.getValue() == 1)
+            .map(Map.Entry::getKey)
+            .findFirst()
+            .ifPresentOrElse(
+                c -> System.out.println("First non-repeated character: " + c),
+                () -> System.out.println("No non-repeated character found.")
+            );
+    }
+
+    private static void sample(String s){
+        Stream.of(s.split(""))
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+            .entrySet()
+            .stream()
+            .filter(map -> map.getValue() == 1)
+            .findFirst()
+            .ifPresent(map -> System.out.println("First non-repeating character is: " + map.getKey()));
     }
 }
 

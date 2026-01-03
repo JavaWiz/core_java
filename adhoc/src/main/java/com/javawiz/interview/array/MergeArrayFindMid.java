@@ -9,15 +9,17 @@ public class MergeArrayFindMid {
         int[] arr1 = /*{1, 3};*/ {-5, 3, 6, 15, 12};
         int[] arr2 = /*{2};*/{-12, -10, -6, -3, 4};
         System.out.println("Median: " + findMedianSortedArrays(arr1, arr2));
+        System.out.println("Median Java 8: " + findMedianSortedArraysJava8(arr1, arr2));
     }
 
     private static String findMedianSortedArrays(int[] arr1, int[] arr2) {
         // Ensure both arrays are sorted before merging
-        Arrays.sort(arr1);
-        Arrays.sort(arr2);
+        //Arrays.sort(arr1);
+        //Arrays.sort(arr2);
         int m = arr1.length;
         int n = arr2.length;
-        int[] merged = new int[m + n];
+        int totalLength = m + n;
+        int[] merged = new int[totalLength];
         int i = 0, j = 0, k = 0;
 
         while (i < m && j < n) {
@@ -37,7 +39,7 @@ public class MergeArrayFindMid {
         }
         System.out.println(Arrays.toString(merged));
         double median;
-        int totalLength = m + n;
+
         if (totalLength % 2 == 0) {
             median = (merged[totalLength / 2 - 1] + merged[totalLength / 2]) / 2.0;
         } else {

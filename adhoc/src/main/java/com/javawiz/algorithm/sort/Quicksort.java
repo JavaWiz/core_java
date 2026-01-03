@@ -2,7 +2,6 @@ package com.javawiz.algorithm.sort;
 
 public class Quicksort  {
     private int[] numbers;
-    private int number;
 
     public void sort(int[] values) {
         // check for empty or null array
@@ -10,8 +9,8 @@ public class Quicksort  {
             return;
         }
         this.numbers = values;
-        number = values.length;
-        quicksort(0, number - 1);
+        int length = values.length;
+        quicksort(0, length - 1);
     }
 
     private void quicksort(int low, int high) {

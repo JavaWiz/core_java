@@ -10,6 +10,9 @@ public class CharStack {
     }
 
     public void push(char ch){
+        if (isFull()) {
+            throw new StackOverflowError("Stack is full");
+        }
         array[++topOfStack] = ch;
     }
 
