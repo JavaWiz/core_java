@@ -52,6 +52,28 @@ public class ManyFindQueryOfEmployees {
             .ifPresent(entry -> System.out.println("Department with highest average salary: " +
                     entry.getKey() + " with average salary: " + entry.getValue()));
 
+        // Simplest approach for Employee with highest salary per department
+        System.out.println("--- Simplest approach for max salary per department ---");
+        Employee.getEmployees().stream()
+            .collect(Collectors.groupingBy(Employee::department,
+                                           Collectors.maxBy(Comparator.comparing(Employee::salary))
+                     )
+            ).forEach((dept, empOpt) -> empOpt.ifPresent(
+                emp -> System.out.println("Top employee in department:" + dept.deptName() + " is " + emp)
+            ));
+
+        System.out.println("--- Alternative approach for max salary per department ---");
+        Employee.getEmployees().stream()
+            .collect(
+                Collectors.toMap(
+                    Employee::department,
+                    Function.identity(),
+                    BinaryOperator.maxBy(Comparator.comparingDouble(Employee::salary))
+                )
+            )
+            .forEach((dept, emp) ->
+                         System.out.println("Top employee in department:" + dept.deptName() + " is " + emp));
+
         // Employee with highest salary per department
         System.out.println("--- Max salary per department ---");
         Employee.getEmployees().stream()
@@ -66,27 +88,6 @@ public class ManyFindQueryOfEmployees {
             .forEach((dept, emp) ->
                          System.out.println("Top employee in department:" + dept.deptName() + " is " + emp));
 
-        System.out.println("--- Alternative approach for max salary per department ---");
-        Employee.getEmployees().stream()
-            .collect(
-                Collectors.toMap(
-                    Employee::department,
-                    Function.identity(),
-                    BinaryOperator.maxBy(Comparator.comparingDouble(Employee::salary))
-                )
-            )
-            .forEach((dept, emp) ->
-                         System.out.println("Top employee in department:" + dept.deptName() + " is " + emp));
-
-        // Another alternative approach for Employee with highest salary per department
-        System.out.println("--- Another Alternative approach for max salary per department ---");
-        Employee.getEmployees().stream()
-            .collect(Collectors.groupingBy(Employee::department,
-                                      Collectors.maxBy(Comparator.comparing(Employee::salary))
-                )
-            ).forEach((dept, empOpt) -> empOpt.ifPresent(
-                emp -> System.out.println("Top employee in department:" + dept.deptName() + " is " + emp)
-            ));
         // Employee with highest salary
         System.out.println("--- Employee with Highest Salary ---");
         Employee.getEmployees().stream()
@@ -133,7 +134,8 @@ public class ManyFindQueryOfEmployees {
         Employee.getEmployees().stream()
             .sorted(
                 Comparator.comparing(Employee::department, Comparator.comparing(Department::deptName))
-                    .thenComparing(Comparator.comparingDouble(Employee::salary).reversed()))
+                    .thenComparing(Comparator.comparingDouble(Employee::salary).reversed())
+            )
             .collect(Collectors.toCollection(LinkedHashSet::new))
             .forEach(emp -> System.out.println("Sort Employee: " + emp.name() +
                 ", By Department name: " + emp.department().deptName() +

@@ -15,7 +15,6 @@ public class FindFrequencyOfEachWord {
 
     private static void findWordFrequency(String input) {
         var words = input.split("\\W");
-        Map<String, Integer> map = new HashMap<>();
         Arrays.stream(words).collect(
             Collectors.groupingBy(Function.identity(), Collectors.counting())
         ).forEach(
