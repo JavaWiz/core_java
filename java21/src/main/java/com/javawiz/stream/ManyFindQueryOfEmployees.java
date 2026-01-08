@@ -4,8 +4,11 @@ import com.javawiz.model.Department;
 import com.javawiz.model.Employee;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.PriorityQueue;
+import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -113,12 +116,13 @@ public class ManyFindQueryOfEmployees {
 
         // Employee with 2nd highest salary
         System.out.println("--- Employee with 2nd Highest ---");
-        Employee.getEmployees().stream()
-            .sorted(Comparator.comparingDouble(Employee::salary).reversed())
-            .skip(1)
-            .findFirst()
+        get2ndHighestSalaryEmployee(Employee.getEmployees())
             .ifPresent(emp -> System.out.println("Employee with 2nd highest salary: " +
                     emp.name() + " with salary: " + emp.salary()));
+
+        find2ndHighestSalariedEmployeePerDept();
+
+        employeeWith2ndHighestSalaryByDeptAvoidSorting();
 
         // Employee with 2nd lowest salary
         System.out.println("--- Employee with 2nd Lowest ---");
@@ -133,12 +137,89 @@ public class ManyFindQueryOfEmployees {
         System.out.println("--- Sort Employees by Department name and then by Salary desc ---");
         Employee.getEmployees().stream()
             .sorted(
-                Comparator.comparing(Employee::department, Comparator.comparing(Department::deptName))
-                    .thenComparing(Comparator.comparingDouble(Employee::salary).reversed())
+                Comparator.comparing(
+                    Employee::department, Comparator.comparing(Department::deptName)
+                    ).thenComparing(Comparator.comparingDouble(Employee::salary).reversed())
             )
             .collect(Collectors.toCollection(LinkedHashSet::new))
             .forEach(emp -> System.out.println("Sort Employee: " + emp.name() +
                 ", By Department name: " + emp.department().deptName() +
                 ",  and then by Salary: " + emp.salary()));
+    }
+
+    /**
+     * Finds and prints the employee with the 2nd highest salary in each department.
+     * This approach sorts the list of employees in each department to find the 2nd highest.
+     * Time Complexity: O(N log N) due to sorting for each department.
+     */
+    private static void find2ndHighestSalariedEmployeePerDept() {
+        System.out.println("--- Employee with 2nd Highest per Department ---");
+        Employee.getEmployees().stream()
+            .collect(Collectors.groupingBy(
+                Employee::department,
+                Collectors.collectingAndThen(
+                    Collectors.toList(),//collects all elements in the current group (e.g. employees in a department) into a List.
+                    ManyFindQueryOfEmployees::get2ndHighestSalaryEmployee
+                )//after collecting to list, process the list to find 2nd highest salary employee.
+            ))
+            .forEach(print());
+    }
+
+    private static BiConsumer<Department, Optional<Employee>> print() {
+        return (dept, empOpt) ->
+            empOpt.ifPresent(emp ->
+                                 System.out.println(
+                                     "Employee with 2nd highest salary in Department: "
+                                         + dept.deptName()
+                                         + " is " + emp.name()
+                                         + " with salary: " + emp.salary()
+                                 )
+            );
+    }
+
+    /**
+     * Finds and prints the employee with the 2nd highest salary in each department
+     * using a priority queue to avoid sorting the entire list.
+     * This approach is more efficient for large datasets.
+     * Time Complexity: O(N log K) where N is number of employees in a department and K is 2 here.
+     */
+    private static void employeeWith2ndHighestSalaryByDeptAvoidSorting() {
+        System.out.println("--- Employee with 2nd Highest (Approach 2) ---");
+        Employee.getEmployees().stream()
+            .collect(Collectors.groupingBy(
+                Employee::department,
+                Collectors.collectingAndThen(
+                    Collectors.toList(),
+                    list -> list.stream()
+                        .collect(Collectors.toCollection(() ->
+                                                             new PriorityQueue<Employee>(
+                                                                 Comparator.comparingDouble(Employee::salary)
+                                                             )
+                        ))
+                )
+            ))
+            .forEach(print2());
+    }
+
+    private static BiConsumer<Department, PriorityQueue<Employee>> print2() {
+        return (dept, pq) -> {
+            if (pq.size() >= 2) {
+                pq.poll(); // remove highest
+                Employee secondHighest = pq.poll();
+                System.out.println(
+                    "Employee with 2nd highest salary in Department: "
+                        + dept.deptName()
+                        + " is " + secondHighest.name()
+                        + " with salary: " + secondHighest.salary()
+                );
+            }
+        };
+    }
+
+    private static Optional<Employee> get2ndHighestSalaryEmployee(List<Employee> list) {
+        return list.stream()
+            .sorted(Comparator.comparingDouble(Employee::salary).reversed())
+            .skip(1)
+            .findFirst();
     }
 }
