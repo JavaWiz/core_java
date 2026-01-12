@@ -26,10 +26,10 @@ import java.util.Set;
 
 public class Longest_Substring_Without_Repeating_Chars {
     public static void main(String[] args) {
-        String str = "pwwkew";
+        String str = /*"pwwkew"*/"abcabcbb";
         System.out.println("Longest substring without repeating characters (stream way): " + normalWay(str));
         System.out.println("Longest substring without repeating characters (sliding window way): " + slidingWindowWay(str));
-        System.out.println("Length of longest substring without repeating characters: " + lengthOfLongestSubstring(str));
+        //System.out.println("Length of longest substring without repeating characters: " + lengthOfLongestSubstring(str));
     }
 
     private static String normalWay(String str){
@@ -40,7 +40,7 @@ public class Longest_Substring_Without_Repeating_Chars {
             // check if char exists in current substring,
             // if yes remove all chars before and including that char
             int index = currentSubstring.indexOf(String.valueOf(c));
-            if (index != -1) {
+            if (index != -1) {//
                 currentSubstring.delete(0, index + 1);
             }
             // append current char to current substring
@@ -60,10 +60,10 @@ public class Longest_Substring_Without_Repeating_Chars {
         int left = 0, right = 0, maxLength = 0, start = 0;
         Set<Character> set = new HashSet<>();
 
-        while (right < str.length()) {
-            if (!set.contains(str.charAt(right))) {
-                set.add(str.charAt(right));
-                int currentWindowLength = right - left + 1;
+        while (right < str.length()) { // while right pointer is less than string length
+            if (!set.contains(str.charAt(right))) { // if char at right pointer is not in set
+                set.add(str.charAt(right)); // add char at right pointer to set
+                int currentWindowLength = right - left + 1; // calculate current window length
                 if (currentWindowLength > maxLength) {
                     maxLength = currentWindowLength;
                     start = left;
@@ -75,21 +75,4 @@ public class Longest_Substring_Without_Repeating_Chars {
         }
         return str.substring(start, start + maxLength);
     }
-
-    public static int lengthOfLongestSubstring(String s) {
-        Set<Character> set = new HashSet<>();
-        int max = 0, i = 0, j = 0, start = 0;
-        while (j < s.length()) {
-            if (!set.contains(s.charAt(j))) {
-                set.add(s.charAt(j++));
-                max = Math.max(max, set.size());
-                start = i;
-            } else {
-                set.remove(s.charAt(i++));
-            }
-        }
-        System.out.println("Longest substring without repeating characters: " + s.substring(start, start + max));
-        return max;
-    }
-
 }

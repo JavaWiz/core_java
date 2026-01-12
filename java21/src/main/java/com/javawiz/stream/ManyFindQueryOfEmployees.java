@@ -145,6 +145,18 @@ public class ManyFindQueryOfEmployees {
             .forEach(emp -> System.out.println("Sort Employee: " + emp.name() +
                 ", By Department name: " + emp.department().deptName() +
                 ",  and then by Salary: " + emp.salary()));
+
+        //filter list of employees where salary > 50000,
+        // convert name to uppercase,
+        // arrange employees in descending order on name
+        // and return a list with full employee object satisfying all of the above conditions.
+        System.out.println("--- Filtered, Mapped, Sorted Employee Names ---");
+        Employee.getEmployees().stream()
+            .filter(emp -> emp.salary() > 40000)
+            .map(ManyFindQueryOfEmployees::mapToEmployeeNameToUpperCase)
+            .sorted(Comparator.comparing(Employee::name).reversed())
+            .toList()
+            .forEach(emp -> System.out.println("Filtered Employee Name: " + emp));
     }
 
     /**
@@ -199,6 +211,15 @@ public class ManyFindQueryOfEmployees {
                 )
             ))
             .forEach(print2());
+    }
+
+    private static Employee mapToEmployeeNameToUpperCase(Employee emp) {
+        return Employee.builder()
+            .id(emp.id())
+            .name(emp.name().toUpperCase())
+            .salary(emp.salary())
+            .department(emp.department())
+            .build();
     }
 
     private static BiConsumer<Department, PriorityQueue<Employee>> print2() {
