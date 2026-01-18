@@ -35,20 +35,46 @@ public class Find_Non_Repeated_Character {
 
     }
 
-    //Optimized traditional version
-    private static void optimized_traditional_version(String s){//(O(n)) because of indexOf and lastIndexOf
-        Map <Character, Integer> charCountMap = new HashMap<>();
-        for(char c : s.toCharArray()){
-            charCountMap.put(c, charCountMap.getOrDefault(c, 0) + 1);
+    static char findNonRepeated(String s) {
+        int[] freq = new int[256];
+
+        for (char c : s.toCharArray()) {
+            freq[c]++;
         }
 
         for (char c : s.toCharArray()) {
-            if (charCountMap.get(c) == 1) {
-                System.out.println("First non-repeated character:" + c);
-                return;
+            if (freq[c] == 1) {
+                return c;
             }
         }
-        System.out.println("No non-repeated character found.");
+        return '\0'; // not found
+    }
+
+    //Optimized traditional version
+    // O(n) time: single pass to build frequency map + single pass to find first non-repeated character
+    // Worst case: all characters are unique, Map stores n entries so O(n) space
+    private static void optimized_traditional_version(String s){
+        char result = firstNonRepeatedWithMap(s);
+        if(result != '\0'){
+            System.out.println("First non-repeated character: " + result);
+        } else {
+            System.out.println("No non-repeated character found.");
+        }
+    }
+
+    // Helper method for optimized traditional version
+    private static char firstNonRepeatedWithMap(String s) {
+        if (s == null || s.isEmpty()) return '\0';
+
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        for (char c : s.toCharArray()) {
+            if (map.get(c) == 1) return c;
+        }
+        return '\0';
     }
 
     private static void firstNonRepeatedCharacter(String s) {
@@ -96,16 +122,6 @@ public class Find_Non_Repeated_Character {
                 c -> System.out.println("First non-repeated character: " + c),
                 () -> System.out.println("No non-repeated character found.")
             );
-    }
-
-    private static void sample(String s){
-        Stream.of(s.split(""))
-            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-            .entrySet()
-            .stream()
-            .filter(map -> map.getValue() == 1)
-            .findFirst()
-            .ifPresent(map -> System.out.println("First non-repeating character is: " + map.getKey()));
     }
 }
 

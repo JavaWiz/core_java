@@ -14,6 +14,7 @@ public class RemoveDuplicate  {
         }
     }
 
+    // Function to remove duplicates from a sorted array using two-pointer technique
     private static int removeDuplicates(int[] array) {
         int i =0;
         for(int j=1; j<array.length; j++){
