@@ -61,18 +61,19 @@ public class Longest_Substring_Without_Repeating_Chars {
         Set<Character> set = new HashSet<>();
 
         while (right < str.length()) { // while right pointer is less than string length
-            if (!set.contains(str.charAt(right))) { // if char at right pointer is not in set
-                set.add(str.charAt(right)); // add char at right pointer to set
+            char ch = str.charAt(right); // get char at right pointer
+            if (!set.contains(ch)) { // if char at right pointer is not in set
+                set.add(ch); // add char at right pointer to set
                 int currentWindowLength = right - left + 1; // calculate current window length
-                if (currentWindowLength > maxLength) {
-                    maxLength = currentWindowLength;
-                    start = left;
+                if (currentWindowLength > maxLength) { // if current window length is greater than max length
+                    maxLength = currentWindowLength; // update max length
+                    start = left; // update start index of longest substring
                 }
-                right++;
+                right++; // move right pointer to the right
             } else {
-                set.remove(str.charAt(left++));
+                set.remove(str.charAt(left++)); // remove char at left pointer from set and move left pointer to the right
             }
         }
-        return str.substring(start, start + maxLength);
+        return str.substring(start, start + maxLength); //
     }
 }

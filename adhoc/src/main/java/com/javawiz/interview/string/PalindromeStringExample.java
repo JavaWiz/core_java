@@ -9,6 +9,11 @@ public class PalindromeStringExample {
     }
 
     private static boolean isPalindrome(String str) {
+
+        if(str == null || str.isEmpty()) {
+            return false;
+        }
+
         int left = 0;
         int right = str.length() - 1;
 

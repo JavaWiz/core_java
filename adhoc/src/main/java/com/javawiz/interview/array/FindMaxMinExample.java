@@ -18,13 +18,6 @@ public class FindMaxMinExample {
         IntegerStreamWay(array2);
     }
 
-    private static void IntegerStreamWay(Integer[] array2) {
-        int min = Stream.of(array2).mapToInt(Integer::intValue).min().getAsInt();
-        int max = Stream.of(array2).mapToInt(Integer::intValue).max().getAsInt();
-        System.out.println("Minimum: " + min);
-        System.out.println("Maximum: " + max);
-    }
-
     private static void traditionalWay(int[] array) {
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
@@ -36,6 +29,13 @@ public class FindMaxMinExample {
                 max = num;
             }
         }
+        System.out.println("Minimum: " + min);
+        System.out.println("Maximum: " + max);
+    }
+
+    private static void IntegerStreamWay(Integer[] array2) {
+        int min = Stream.of(array2).mapToInt(Integer::intValue).min().getAsInt();
+        int max = Stream.of(array2).mapToInt(Integer::intValue).max().getAsInt();
         System.out.println("Minimum: " + min);
         System.out.println("Maximum: " + max);
     }

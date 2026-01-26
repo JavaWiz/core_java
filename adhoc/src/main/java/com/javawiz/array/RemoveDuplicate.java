@@ -32,6 +32,8 @@ public class RemoveDuplicate  {
         for(int j=0; j<arrayCopy.length; j++){
             arrayCopy[j] = array[j];
         }
-        Arrays.stream(arrayCopy).forEach(System.out::println);
+        System.out.print("\nReconstructed Array: ");
+        Arrays.stream(arrayCopy).forEach(e -> System.out.print(e + " "));
+        System.out.println();
     }
 }

@@ -3,7 +3,7 @@ package com.javawiz.interview.array;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
-public class MergeArrayFindMid {
+public class MergeArrayFindMedian {
 
     public static void main(String[] args) {
         int[] arr1 = /*{1, 3};*/ {-5, 3, 6, 15, 12};
@@ -14,8 +14,6 @@ public class MergeArrayFindMid {
 
     private static String findMedianSortedArrays(int[] arr1, int[] arr2) {
         // Ensure both arrays are sorted before merging
-        //Arrays.sort(arr1);
-        //Arrays.sort(arr2);
         int m = arr1.length;
         int n = arr2.length;
         int totalLength = m + n;

@@ -1,9 +1,6 @@
 package com.javawiz.interview.string;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,6 +18,7 @@ public class Find_Non_Repeated_Character {
         firstNonRepeatedCharacter(s);
         streamWay(s);
         anotherStreamWay(s);
+        myWay(s);
     }
 
     //most simple way
@@ -92,12 +90,12 @@ public class Find_Non_Repeated_Character {
             );
     }
 
-    private static void streamWay(String s){
-       s.chars()
+    private static void streamWay(String input){
+        input.chars()
            // Box to Integer stream
             .boxed()
             // Group by character and count occurrences
-            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+            .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
             .entrySet().stream()
             // Filter non-repeated characters
             .filter(entry -> entry.getValue() == 1)
@@ -113,6 +111,19 @@ public class Find_Non_Repeated_Character {
     private static void anotherStreamWay(String input) {
         input.chars()
             .mapToObj(c -> (char)c)
+            .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+            .entrySet().stream()
+            .filter(e -> e.getValue() == 1)
+            .map(Map.Entry::getKey)
+            .findFirst()
+            .ifPresentOrElse(
+                c -> System.out.println("First non-repeated character: " + c),
+                () -> System.out.println("No non-repeated character found.")
+            );
+    }
+
+    private static void myWay(String s) {
+        Arrays.stream(s.split(""))
             .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
             .entrySet().stream()
             .filter(e -> e.getValue() == 1)

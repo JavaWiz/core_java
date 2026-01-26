@@ -1,26 +1,18 @@
 package com.javawiz.interview.string;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class AnagramChecker {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter the first string:");
-        String str1 = scanner.nextLine();
-
-        System.out.println("Enter the second string:");
-        String str2 = scanner.nextLine();
+        String str1 = "listen";
+        String str2 = "silent";
 
         if (isAnagram(str1, str2)) {
             System.out.println("The strings are anagrams.");
         } else {
             System.out.println("The strings are not anagrams.");
         }
-
-        scanner.close();
     }
 
     /**
